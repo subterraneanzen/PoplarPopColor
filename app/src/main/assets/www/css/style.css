@@ -1,0 +1,214 @@
+/*
+  VOICE   warm, friendly convenience-store fountain counter
+  IDEA    a real fountain dispenser: lit sign, steel valve panel, drip tray, cups on the counter
+  PICTURE the machine itself, labels on valves, levers that tilt and pour when picked
+  COLOUR  icy Polar blue sign, brushed steel, black housing, warm sand counter, red accent
+  TYPE    heavy rounded system sans (works offline in the app)
+  LAYOUT  title → drink heading → 16 valves → cup heading → 3 cups, single column
+*/
+:root {
+  --ice: #1f6fd1;
+  --ice-deep: #0e3b78;
+  --red: #e53935;
+  --housing: #1b1f25;
+  --counter: #e8d6b8;
+  --counter-edge: #c9b18a;
+  --ink: #1b1f25;
+  --ring: #ffd23f;
+}
+* { box-sizing: border-box; min-width: 0; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; }
+body {
+  background: linear-gradient(180deg, #0e3b78 0%, #1a5bb0 55%, #2a6fc4 100%);
+  min-height: 100vh;
+  color: var(--ink);
+  font: 16px/1.4 "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+  overflow-x: clip;
+  -webkit-user-select: none; user-select: none;
+}
+.store { max-width: 1100px; margin: 0 auto; padding: 14px 12px 28px; }
+
+/* ---------- Machine ---------- */
+.machine {
+  background: linear-gradient(180deg, #2a3038, var(--housing));
+  border-radius: 26px 26px 14px 14px;
+  padding: 12px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.marquee {
+  position: relative; overflow: hidden;
+  border-radius: 16px;
+  padding: clamp(18px, 5vw, 34px) 12px;
+  text-align: center;
+  background:
+    radial-gradient(120% 90% at 50% 0%, #8fd3ff 0%, rgba(143,211,255,0) 60%),
+    linear-gradient(180deg, #3d9bf0 0%, var(--ice) 55%, var(--ice-deep) 100%);
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,.25), inset 0 -10px 24px rgba(0,0,0,.25);
+}
+.frost { position: absolute; border-radius: 50%; background: rgba(255,255,255,.18); }
+.f1 { width: 90px; height: 90px; left: -20px; top: -24px; }
+.f2 { width: 46px; height: 46px; right: 12%; bottom: -14px; }
+.f3 { width: 22px; height: 22px; left: 18%; bottom: 10px; background: rgba(255,255,255,.28); }
+.brand {
+  position: relative; margin: 0;
+  font-size: clamp(40px, 12vw, 84px); font-weight: 900; font-style: italic;
+  line-height: 1; letter-spacing: -.02em; color: #fff;
+  -webkit-text-stroke: clamp(3px, .9vw, 6px) var(--ice-deep);
+  paint-order: stroke fill;
+  text-shadow: 0 5px 0 var(--ice-deep), 0 10px 18px rgba(0,0,0,.35);
+  transform: rotate(-3deg);
+}
+
+.heading {
+  margin: 0 0 14px; text-align: center;
+  font-size: clamp(17px, 4.4vw, 26px); font-weight: 900; text-transform: uppercase;
+  color: var(--ink);
+}
+
+.steel {
+  margin-top: 12px; border-radius: 12px; padding: 16px 10px 10px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 2px, rgba(0,0,0,.03) 2px 5px),
+    linear-gradient(180deg, #eef1f4 0%, #c3c9d0 45%, #dfe3e8 70%, #b2b9c1 100%);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,.25);
+}
+.ph-note { margin: 6px 0 0; text-align: center; font-size: 13px; color: #4b5560; }
+
+/* ---------- Valves ---------- */
+.valves {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px clamp(8px, 2.4vw, 16px);
+}
+@media (min-width: 760px) { .valves { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
+
+.valve {
+  appearance: none; border: 0; background: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer; font: inherit; color: inherit;
+}
+.valve:focus-visible { outline: 3px solid var(--ring); outline-offset: 4px; border-radius: 12px; }
+
+.label {
+  container-type: inline-size;
+  position: relative; overflow: hidden;
+  width: 100%; aspect-ratio: 3 / 4;
+  border-radius: 12px 12px 6px 6px;
+  background: var(--bg); color: var(--fg);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.35),
+    inset 0 -6px 0 rgba(0,0,0,.18),
+    0 3px 0 #0d1014, 0 6px 10px rgba(0,0,0,.3);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.label::before { /* glossy plastic */
+  content: ""; position: absolute; inset: 0 0 55% 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.32), rgba(255,255,255,0));
+  pointer-events: none;
+}
+.label-text {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: .08em;
+  font-weight: 900; text-transform: uppercase; text-align: center;
+  font-size: 15.5cqw; line-height: .95; letter-spacing: -.02em;
+  padding: 0 6cqw 8cqw;
+}
+.stripe { position: absolute; left: 0; right: 0; bottom: 16cqw; height: 5cqw; opacity: .9; }
+.ph-tag {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+  padding: 2cqw 0 2.5cqw;
+  font-size: max(7px, 8cqw); font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  background: rgba(0,0,0,.28); color: rgba(255,255,255,.9);
+}
+.label-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.housing {
+  width: 74%; height: 12px; margin-top: 3px;
+  border-radius: 0 0 8px 8px;
+  background: linear-gradient(180deg, #2b3139, #0d1014);
+}
+.spout { position: relative; width: 100%; height: 46px; display: flex; justify-content: center; }
+.nozzle {
+  width: 22%; height: 18px; border-radius: 0 0 6px 6px;
+  background: linear-gradient(90deg, #6b737d, #d7dce1 45%, #7d858f);
+}
+.lever {
+  position: absolute; top: 0; left: calc(50% + 10%);
+  width: 6px; height: 40px; border-radius: 3px;
+  background: linear-gradient(90deg, #0d1014, #3a414a);
+  transform-origin: top center; transform: rotate(8deg);
+  transition: transform .2s ease;
+}
+.stream {
+  position: absolute; top: 18px; left: 50%; width: 6px; height: 28px; margin-left: -3px;
+  border-radius: 0 0 3px 3px;
+  background: linear-gradient(180deg, var(--liquid), var(--liquid));
+  box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform .25s ease;
+}
+
+.valve.is-selected .label {
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 0 4px var(--ring), 0 0 0 7px #0d1014,
+    inset 0 2px 0 rgba(255,255,255,.35), 0 10px 18px rgba(0,0,0,.35);
+}
+.valve.is-selected .lever { transform: rotate(-16deg); }
+.valve.is-selected .stream { transform: scaleY(1); animation: pour .5s linear infinite alternate; }
+@keyframes pour { from { opacity: .85; } to { opacity: 1; } }
+
+.tray {
+  height: 30px; margin: 10px 4px 2px; border-radius: 6px;
+  background:
+    repeating-linear-gradient(90deg, #0b0d10 0 6px, #2a3038 6px 9px),
+    #0b0d10;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,.6), 0 2px 0 rgba(255,255,255,.08);
+}
+
+/* ---------- Counter + cups ---------- */
+.counter {
+  margin-top: 18px; border-radius: 18px; padding: 20px 12px 18px;
+  background: linear-gradient(180deg, #f2e4cc, var(--counter));
+  box-shadow: inset 0 -6px 0 var(--counter-edge), 0 12px 28px rgba(0,0,0,.3);
+}
+.cups {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(8px, 3vw, 22px); max-width: 640px; margin: 0 auto; align-items: end;
+}
+.cup {
+  position: relative; appearance: none; cursor: pointer; font: inherit;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 8px;
+  min-height: 190px; padding: 14px 6px 12px;
+  background: #fff8ec; border: 3px solid #d9c39d; border-radius: 18px;
+  box-shadow: 0 4px 0 #c9b18a;
+  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.cup:focus-visible { outline: 3px solid var(--ice); outline-offset: 3px; }
+.cup-art { display: flex; align-items: flex-end; height: 124px; }
+.cup-svg { display: block; filter: drop-shadow(0 4px 4px rgba(0,0,0,.18)); }
+.cup-name { font-size: clamp(16px, 4.4vw, 22px); font-weight: 900; text-transform: uppercase; color: var(--ink); }
+.check {
+  position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--red); transform: scale(0); transition: transform .18s ease;
+}
+.check::after {
+  content: ""; position: absolute; left: 10px; top: 5px; width: 7px; height: 13px;
+  border: solid #fff; border-width: 0 3px 3px 0; transform: rotate(45deg);
+}
+.cup.is-selected {
+  border-color: var(--ice); background: #fff;
+  box-shadow: 0 0 0 4px rgba(31,111,209,.25), 0 4px 0 var(--ice-deep);
+  transform: translateY(-3px);
+}
+.cup.is-selected .check { transform: scale(1); }
+
+.summary {
+  margin: 16px 0 0; text-align: center; font-weight: 700; font-size: 16px; color: #5a4526;
+  white-space: pre;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

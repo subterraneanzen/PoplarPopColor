@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Simple fountain cup on the 108dp adaptive-icon canvas (safe zone 66dp). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- straw -->
+    <path android:fillColor="#E53935" android:pathData="M58,22 L63,23 L59,40 L54,39 Z" />
+    <!-- lid -->
+    <path android:fillColor="#EEF4FB" android:pathData="M34,36 L74,36 Q77,36 77,39 L77,41 Q77,44 74,44 L34,44 Q31,44 31,41 L31,39 Q31,36 34,36 Z" />
+    <!-- cup body -->
+    <path android:fillColor="#FFFFFF" android:pathData="M34,44 L74,44 L69,86 Q54,89 39,86 Z" />
+    <!-- band -->
+    <path android:fillColor="#0E3B78" android:pathData="M36.2,58 L71.8,58 L70.1,72 L37.9,72 Z" />
+    <path android:fillColor="#E53935" android:pathData="M37.9,72 L70.1,72 L69.7,76 L38.3,76 Z" />
+</vector>

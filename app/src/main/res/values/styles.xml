@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">POLAR POP</string>
+    <color name="polar_deep">#0E3B78</color>
+    <color name="polar_blue">#1F6FD1</color>
+
+    <style name="PolarPopTheme" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/polar_deep</item>
+        <item name="android:navigationBarColor">@color/polar_deep</item>
+        <item name="android:windowBackground">@color/polar_deep</item>
+    </style>
+</resources>

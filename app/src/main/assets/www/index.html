@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>POLAR POP</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="store">
+    <section class="machine" aria-labelledby="title">
+      <header class="marquee">
+        <span class="frost f1"></span><span class="frost f2"></span><span class="frost f3"></span>
+        <h1 id="title" class="brand">POLAR POP</h1>
+      </header>
+
+      <div class="steel">
+        <h2 class="heading" id="drink-heading">Select your fountain drink</h2>
+        <div id="valves" class="valves" role="radiogroup" aria-labelledby="drink-heading"></div>
+        <p class="ph-note">Drink labels are placeholders until the real label artwork is supplied.</p>
+      </div>
+      <div class="tray" aria-hidden="true"></div>
+    </section>
+
+    <section class="counter" aria-labelledby="cup-heading">
+      <h2 class="heading on-counter" id="cup-heading">Choose your cup size</h2>
+      <div id="cups" class="cups" role="radiogroup" aria-labelledby="cup-heading"></div>
+      <p id="summary" class="summary" aria-live="polite">No drink yet  ·  No size yet</p>
+    </section>
+  </main>
+
+  <script src="js/drinks.js"></script>
+  <script src="js/cups.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/colouring.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
